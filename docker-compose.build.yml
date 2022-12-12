@@ -1,0 +1,14 @@
+version: '3.3'
+
+services:
+    desafio-ats-api:
+        image: ${REGISTRY}/desafio-ats-api:${TAG}
+        build:
+            context: ./back
+            dockerfile: ./Dockerfile
+
+    desafio-ats-front:
+        image: ${REGISTRY}/desafio-ats-front:${TAG}
+        build:
+            context: ./front/desafio-ats
+            dockerfile: ./Dockerfile

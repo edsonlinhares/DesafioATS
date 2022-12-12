@@ -1,0 +1,1641 @@
+{
+	"info": {
+		"_postman_id": "22725d84-27f1-4c6f-81c8-1705a463822f",
+		"name": "Desafio ATS",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "4921564"
+	},
+	"item": [
+		{
+			"name": "Recrutador",
+			"item": [
+				{
+					"name": "Novo Recrutador",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"if(pm.response.code === 200){\r",
+									"    var jsonData = JSON.parse(responseBody);\r",
+									"    pm.collectionVariables.set(\"accessToken\", jsonData.accessToken);\r",
+									"    pm.collectionVariables.set(\"refreshToken\", jsonData.refreshToken);\r",
+									"    pm.collectionVariables.set(\"recrutadorId\", jsonData.userId);\r",
+									"}\r",
+									"\r",
+									"pm.test(\"Status code is 200\", function(){\r",
+									"    pm.response.to.have.status(200);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"nome\": \"Recrutador Teste Da Silva\",\r\n  \"email\": \"{{userNameRecrutador}}\",\r\n  \"celular\": \"11985851212\",\r\n  \"senha\": \"{{passwordRecrutador}}\",\r\n  \"confirmarSenha\": \"{{passwordRecrutador}}\",\r\n  \"tipoLogin\": \"Recrutador\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{urlBase}}/api/v1/auth/registrar",
+							"host": [
+								"{{urlBase}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"auth",
+								"registrar"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Entrar",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"if(pm.response.code === 200){\r",
+									"    var jsonData = JSON.parse(responseBody);\r",
+									"    pm.collectionVariables.set(\"accessToken\", jsonData.accessToken);\r",
+									"    pm.collectionVariables.set(\"refreshToken\", jsonData.refreshToken);\r",
+									"    pm.collectionVariables.set(\"recrutadorId\", jsonData.userId);\r",
+									"}\r",
+									"\r",
+									"pm.test(\"Status code is 200\", function(){\r",
+									"    pm.response.to.have.status(200);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"userName\": \"{{userNameRecrutador}}\",\r\n  \"password\": \"{{passwordRecrutador}}\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{urlBase}}/api/v1/auth/entrar",
+							"host": [
+								"{{urlBase}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"auth",
+								"entrar"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Refresh-token",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"if(pm.response.code === 200){\r",
+									"    var jsonData = JSON.parse(responseBody);\r",
+									"    pm.collectionVariables.set(\"accessToken\", jsonData.accessToken);\r",
+									"    pm.collectionVariables.set(\"refreshToken\", jsonData.refreshToken);\r",
+									"    pm.collectionVariables.set(\"recrutadorId\", jsonData.userId);\r",
+									"}\r",
+									"\r",
+									"pm.test(\"Status code is 200\", function(){\r",
+									"    pm.response.to.have.status(200);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{urlBase}}/api/v1/auth/refresh-token?refreshToken={{refreshToken}}",
+							"host": [
+								"{{urlBase}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"auth",
+								"refresh-token"
+							],
+							"query": [
+								{
+									"key": "refreshToken",
+									"value": "{{refreshToken}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Alterar senha",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function(){\r",
+									"    pm.response.to.have.status(200);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"userName\": \"{{userNameRecrutador}}\",\r\n  \"senha\": \"{{passwordRecrutador}}\",\r\n  \"novaSenha\":\"{{passwordRecrutador}}\",\r\n  \"confirmarSenha\": \"{{passwordRecrutador}}\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{urlBase}}/api/v1/auth/alterar-senha",
+							"host": [
+								"{{urlBase}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"auth",
+								"alterar-senha"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Esqueci senha",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function(){\r",
+									"    pm.response.to.have.status(200);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"email\": \"{{userNameRecrutador}}\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{urlBase}}/api/v1/auth/esqueci-senha",
+							"host": [
+								"{{urlBase}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"auth",
+								"esqueci-senha"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Reset senha",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function(){\r",
+									"    pm.response.to.have.status(200);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"email\": \"{{userNameRecrutador}}\",\r\n  \"senha\": \"{{passwordRecrutador}}\",\r\n  \"confirmarSenha\": \"{{passwordRecrutador}}\",\r\n  \"code\": \"string\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{urlBase}}/api/v1/auth/reset-senha",
+							"host": [
+								"{{urlBase}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"auth",
+								"reset-senha"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Candidato",
+			"item": [
+				{
+					"name": "Novo Candidato",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"if(pm.response.code === 200){\r",
+									"    var jsonData = JSON.parse(responseBody);\r",
+									"    pm.collectionVariables.set(\"accessToken\", jsonData.accessToken);\r",
+									"    pm.collectionVariables.set(\"refreshToken\", jsonData.refreshToken);\r",
+									"    pm.collectionVariables.set(\"candidatoId\", jsonData.userId);\r",
+									"}\r",
+									"\r",
+									"pm.test(\"Status code is 200\", function(){\r",
+									"    pm.response.to.have.status(200);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"nome\": \"Candidato Teste Da Silva\",\r\n  \"email\": \"{{userNameCandidato}}\",\r\n  \"celular\": \"11985851515\",\r\n  \"senha\": \"{{passwordCandidato}}\",\r\n  \"confirmarSenha\": \"{{passwordCandidato}}\",\r\n  \"tipoLogin\": \"Candidato\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{urlBase}}/api/v1/auth/registrar",
+							"host": [
+								"{{urlBase}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"auth",
+								"registrar"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Entrar",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"if(pm.response.code === 200){\r",
+									"    var jsonData = JSON.parse(responseBody);\r",
+									"    pm.collectionVariables.set(\"accessToken\", jsonData.accessToken);\r",
+									"    pm.collectionVariables.set(\"refreshToken\", jsonData.refreshToken);\r",
+									"    pm.collectionVariables.set(\"candidatoId\", jsonData.userToken.id);\r",
+									"    pm.collectionVariables.set(\"candidatoNome\", jsonData.userToken.nome);\r",
+									"    pm.collectionVariables.set(\"candidatoEmail\", jsonData.userToken.email);\r",
+									"    pm.collectionVariables.set(\"candidatoTelefone\", jsonData.userToken.telefone);\r",
+									"}\r",
+									"\r",
+									"pm.test(\"Status code is 200\", function(){\r",
+									"    pm.response.to.have.status(200);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"userName\": \"{{userNameCandidato}}\",\r\n  \"password\": \"{{passwordCandidato}}\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{urlBase}}/api/v1/auth/entrar",
+							"host": [
+								"{{urlBase}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"auth",
+								"entrar"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Refresh-token",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"if(pm.response.code === 200){\r",
+									"    var jsonData = JSON.parse(responseBody);\r",
+									"    pm.collectionVariables.set(\"accessToken\", jsonData.accessToken);\r",
+									"    pm.collectionVariables.set(\"refreshToken\", jsonData.refreshToken);\r",
+									"    pm.collectionVariables.set(\"candidatoId\", jsonData.userId);\r",
+									"}\r",
+									"\r",
+									"pm.test(\"Status code is 200\", function(){\r",
+									"    pm.response.to.have.status(200);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{urlBase}}/api/v1/auth/refresh-token?refreshToken={{refreshToken}}",
+							"host": [
+								"{{urlBase}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"auth",
+								"refresh-token"
+							],
+							"query": [
+								{
+									"key": "refreshToken",
+									"value": "{{refreshToken}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Alterar senha",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function(){\r",
+									"    pm.response.to.have.status(200);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"userName\": \"{{userNameCandidato}}\",\r\n  \"senha\": \"{{passwordCandidato}}\",\r\n  \"novaSenha\":\"{{passwordCandidato}}\",\r\n  \"confirmarSenha\": \"{{passwordCandidato}}\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{urlBase}}/api/v1/auth/alterar-senha",
+							"host": [
+								"{{urlBase}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"auth",
+								"alterar-senha"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Esqueci senha",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function(){\r",
+									"    pm.response.to.have.status(200);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"email\": \"{{userNameCandidato}}\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{urlBase}}/api/v1/auth/esqueci-senha",
+							"host": [
+								"{{urlBase}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"auth",
+								"esqueci-senha"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Reset senha",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function(){\r",
+									"    pm.response.to.have.status(200);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"email\": \"{{userNameCandidato}}\",\r\n  \"senha\": \"{{passwordCandidato}}\",\r\n  \"confirmarSenha\": \"{{passwordCandidato}}\",\r\n  \"code\": \"string\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{urlBase}}/api/v1/auth/reset-senha",
+							"host": [
+								"{{urlBase}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"auth",
+								"reset-senha"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Vagas",
+			"item": [
+				{
+					"name": "Listar vagas",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"if(pm.response.code === 200){\r",
+									"    var jsonData = JSON.parse(responseBody);\r",
+									"    if(jsonData.list.length > 0){\r",
+									"        pm.collectionVariables.set(\"vagaId\", jsonData.list[0].id);\r",
+									"        pm.collectionVariables.set(\"tituloVaga\", jsonData.list[0].titulo);\r",
+									"    }\r",
+									"}\r",
+									"\r",
+									"pm.test(\"Status code is 200\", function(){\r",
+									"    pm.response.to.have.status(200);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{urlBase}}/api/v1/vagas",
+							"host": [
+								"{{urlBase}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"vagas"
+							],
+							"query": [
+								{
+									"key": "pageSize",
+									"value": "30",
+									"disabled": true
+								},
+								{
+									"key": "pageIndex",
+									"value": "1",
+									"disabled": true
+								},
+								{
+									"key": "search",
+									"value": ".net",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Obter vaga",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function(){\r",
+									"    pm.response.to.have.status(200);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{urlBase}}/api/v1/vagas/:id",
+							"host": [
+								"{{urlBase}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"vagas",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "{{vagaId}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Adicionar vaga",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"if(pm.response.code === 200){\r",
+									"    var jsonData = JSON.parse(responseBody);\r",
+									"    pm.collectionVariables.set(\"vagaId\", jsonData.id);\r",
+									"    pm.collectionVariables.set(\"tituloVaga\", jsonData.titulo);\r",
+									"}\r",
+									"\r",
+									"\r",
+									"pm.test(\"Status code is 200\", function(){\r",
+									"    pm.response.to.have.status(200);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"titulo\": \"Desenvolvedor(a) C# Sênior\",\r\n  \"requitosTecnicos\": \"ASP.NET Core, ASP.NET MVC 5.\\nReact, JQuery, CSS;\\nGIT,\\nSQL Server;\",\r\n  \"requitosDesejaveis\": \"Dedicação e pré-disposição para estudar;\\nPerfil analítico e de processos de negócios, com noções de lógica de programação para compreender \\ne desenhar fluxos;\\nBoa capacidade de comunicação para interagir com clientes internos;\",\r\n  \"atividades\": \"Codificar e testar sistemas. Executar a manutenção dos sistemas, fazendo eventuais correções necessárias, visando atender às necessidades dos usuários.\",\r\n  \"tipoContrato\": \"PJ\",\r\n  \"remuneracao\": 60,\r\n  \"tipoRemuneracao\": \"ValorHora\",\r\n  \"tipoJornada\": \"Remoto\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{urlBase}}/api/v1/vagas",
+							"host": [
+								"{{urlBase}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"vagas"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Alterar vaga",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"if(pm.response.code === 200){\r",
+									"    var jsonData = JSON.parse(responseBody);\r",
+									"    pm.collectionVariables.set(\"tituloVaga\", jsonData.titulo);\r",
+									"}\r",
+									"\r",
+									"pm.test(\"Status code is 200\", function(){\r",
+									"    pm.response.to.have.status(200);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"id\": \"{{vagaId}}\",\r\n  \"titulo\": \"Desenvolvedor(a) C# Sênior ZZZZ\",\r\n  \"requitosTecnicos\": \"ASP.NET Core, ASP.NET MVC 5.\\nReact, JQuery, CSS;\\nGIT,\\nSQL Server;\\nzzzzzzzzzzzzzzzzzzzzzzzzz\",\r\n  \"requitosDesejaveis\": \"Dedicação e pré-disposição para estudar;\\nPerfil analítico e de processos de negócios, com noções de lógica de programação para compreender \\ne desenhar fluxos;\\nBoa capacidade de comunicação para interagir com clientes internos;\\nzzzzzzzzzzzzzzzzzzzzzzzzz\",\r\n  \"atividades\": \"Codificar e testar sistemas. Executar a manutenção dos sistemas, fazendo eventuais correções necessárias, visando atender às necessidades dos usuários.\\nzzzzzzzzzzzzzzzzzzzzzzzzz\",\r\n  \"tipoContrato\": \"CLT\",\r\n  \"remuneracao\": 65,\r\n  \"tipoRemuneracao\": \"ValorHora\",\r\n  \"tipoJornada\": \"Presencial\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{urlBase}}/api/v1/vagas",
+							"host": [
+								"{{urlBase}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"vagas"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Remover vaga",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function(){\r",
+									"    pm.response.to.have.status(200);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{urlBase}}/api/v1/vagas/:id",
+							"host": [
+								"{{urlBase}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"vagas",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "{{vagaId}}"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Candidatura",
+			"item": [
+				{
+					"name": "Candidatar",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"if(pm.response.code === 200){\r",
+									"    var jsonData = JSON.parse(responseBody);\r",
+									"    pm.collectionVariables.set(\"candidaturaId\", jsonData.id);\r",
+									"}\r",
+									"\r",
+									"pm.test(\"Status code is 200\", function(){\r",
+									"    pm.response.to.have.status(200);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"recrutadorId\": \"{{recrutadorId}}\",\r\n  \"vagaId\": \"{{vagaId}}\",\r\n  \"tituloVaga\": \"{{tituloVaga}}\",\r\n  \"candidatoId\": \"{{candidatoId}}\",\r\n  \"candidatoNome\": \"{{candidatoNome}}\",\r\n  \"candidatoEmail\": \"{{candidatoEmail}}\",\r\n  \"candidatoTelefone\": \"{{candidatoTelefone}}\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{urlBase}}/api/v1/candidaturas",
+							"host": [
+								"{{urlBase}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"candidaturas"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Listar candidaturas",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"if(pm.response.code === 200){\r",
+									"    var jsonData = JSON.parse(responseBody);\r",
+									"    if(jsonData.list.length > 0){\r",
+									"        pm.collectionVariables.set(\"candidaturaId\", jsonData.list[0].id);\r",
+									"    }\r",
+									"}\r",
+									"\r",
+									"pm.test(\"Status code is 200\", function(){\r",
+									"    pm.response.to.have.status(200);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{urlBase}}/api/v1/candidaturas",
+							"host": [
+								"{{urlBase}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"candidaturas"
+							],
+							"query": [
+								{
+									"key": "pageSize",
+									"value": "30",
+									"disabled": true
+								},
+								{
+									"key": "pageIndex",
+									"value": "1",
+									"disabled": true
+								},
+								{
+									"key": "search",
+									"value": ".net",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Obter candidatura",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"if(pm.response.code === 200){\r",
+									"    var jsonData = JSON.parse(responseBody);\r",
+									"    if(jsonData.list.length > 0){\r",
+									"        pm.collectionVariables.set(\"vagaId\", jsonData.list[0].id);\r",
+									"        pm.collectionVariables.set(\"tituloVaga\", jsonData.list[0].titulo);\r",
+									"    }\r",
+									"}\r",
+									"\r",
+									"pm.test(\"Status code is 200\", function(){\r",
+									"    pm.response.to.have.status(200);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{urlBase}}/api/v1/candidaturas/:id",
+							"host": [
+								"{{urlBase}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"candidaturas",
+								":id"
+							],
+							"query": [
+								{
+									"key": "pageSize",
+									"value": "30",
+									"disabled": true
+								},
+								{
+									"key": "pageIndex",
+									"value": "1",
+									"disabled": true
+								},
+								{
+									"key": "search",
+									"value": ".net",
+									"disabled": true
+								}
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": null
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Curriculos",
+			"item": [
+				{
+					"name": "Formacao Academica",
+					"item": [
+						{
+							"name": "Adicionar Formacao Academica",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"if(pm.response.code === 200){\r",
+											"    var jsonData = JSON.parse(responseBody);\r",
+											"    pm.collectionVariables.set(\"formacaoId\", jsonData.id);\r",
+											"}\r",
+											"\r",
+											"pm.test(\"Status code is 200\", function(){\r",
+											"    pm.response.to.have.status(200);\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"curriculoId\": \"{{curriculoId}}\",\r\n  \"titulo\": \"Graduacao em  XPTO\",\r\n  \"instituicao\": \"XPTO\",\r\n  \"inicio\": \"2020-12-11T16:18:09.550Z\",\r\n  \"fim\": \"2022-12-11T16:18:09.550Z\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{urlBase}}/api/v1/curriculos/formacao",
+									"host": [
+										"{{urlBase}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"curriculos",
+										"formacao"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Obter Formacao Academica",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 200\", function(){\r",
+											"    pm.response.to.have.status(200);\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{urlBase}}/api/v1/curriculos/formacao/:id",
+									"host": [
+										"{{urlBase}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"curriculos",
+										"formacao",
+										":id"
+									],
+									"variable": [
+										{
+											"key": "id",
+											"value": "{{formacaoId}}"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Atualizar Formacao Academica",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 200\", function(){\r",
+											"    pm.response.to.have.status(200);\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"id\": \"{{formacaoId}}\",\r\n  \"curriculoId\": \"{{curriculoId}}\",\r\n  \"titulo\": \"Graduacao em  XPTO zz\",\r\n  \"instituicao\": \"XPTO zz\",\r\n  \"inicio\": \"2020-12-11T16:18:09.550Z\",\r\n  \"fim\": \"2022-12-11T16:18:09.550Z\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{urlBase}}/api/v1/curriculos/formacao",
+									"host": [
+										"{{urlBase}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"curriculos",
+										"formacao"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Remover Formacao Academica",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 200\", function(){\r",
+											"    pm.response.to.have.status(200);\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "{{urlBase}}/api/v1/curriculos/formacao/:id/:curriculoId",
+									"host": [
+										"{{urlBase}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"curriculos",
+										"formacao",
+										":id",
+										":curriculoId"
+									],
+									"variable": [
+										{
+											"key": "id",
+											"value": "{{formacaoId}}"
+										},
+										{
+											"key": "curriculoId",
+											"value": "{{curriculoId}}"
+										}
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Experiencia Profissional",
+					"item": [
+						{
+							"name": "Adicionar Experiencia Profissional",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"if(pm.response.code === 200){\r",
+											"    var jsonData = JSON.parse(responseBody);\r",
+											"    pm.collectionVariables.set(\"experienciaId\", jsonData.id);\r",
+											"}\r",
+											"\r",
+											"pm.test(\"Status code is 200\", function(){\r",
+											"    pm.response.to.have.status(200);\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"curriculoId\": \"{{curriculoId}}\",\r\n  \"titulo\": \"Graduacao em  XPTO\",\r\n  \"empresa\": \"XPTO\",\r\n  \"localidade\": \"Jundiai-SP\",\r\n  \"resumo\": \"Codificar e testar sistemas. Executar a manutenção dos sistemas, fazendo eventuais correções necessárias...\",\r\n  \"inicio\": \"2020-12-11T16:18:09.550Z\",\r\n  \"fim\": \"2022-12-11T16:18:09.550Z\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{urlBase}}/api/v1/curriculos/experiencia",
+									"host": [
+										"{{urlBase}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"curriculos",
+										"experiencia"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Obter Experiencia Profissional",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 200\", function(){\r",
+											"    pm.response.to.have.status(200);\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{urlBase}}/api/v1/curriculos/experiencia/:id",
+									"host": [
+										"{{urlBase}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"curriculos",
+										"experiencia",
+										":id"
+									],
+									"variable": [
+										{
+											"key": "id",
+											"value": "{{experienciaId}}"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Atualizar Experiencia Profissional",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 200\", function(){\r",
+											"    pm.response.to.have.status(200);\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"id\": \"{{experienciaId}}\",\r\n  \"curriculoId\": \"{{curriculoId}}\",\r\n  \"titulo\": \"Graduacao em  XPTO\",\r\n  \"empresa\": \"XPTO\",\r\n  \"localidade\": \"Jundiai-SP\",\r\n  \"resumo\": \"zzz Codificar e testar sistemas. Executar a manutenção dos sistemas, fazendo eventuais correções necessárias...\",\r\n  \"inicio\": \"2020-12-11T16:18:09.550Z\",\r\n  \"fim\": \"2022-12-11T16:18:09.550Z\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{urlBase}}/api/v1/curriculos/experiencia",
+									"host": [
+										"{{urlBase}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"curriculos",
+										"experiencia"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Remover Experiencia Profissional",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 200\", function(){\r",
+											"    pm.response.to.have.status(200);\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "{{urlBase}}/api/v1/curriculos/experiencia/:id/:curriculoId",
+									"host": [
+										"{{urlBase}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"curriculos",
+										"experiencia",
+										":id",
+										":curriculoId"
+									],
+									"variable": [
+										{
+											"key": "id",
+											"value": "{{experienciaId}}"
+										},
+										{
+											"key": "curriculoId",
+											"value": "{{curriculoId}}"
+										}
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Obter curriculo",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function(){\r",
+									"    pm.response.to.have.status(200);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{urlBase}}/api/v1/curriculos/:id",
+							"host": [
+								"{{urlBase}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"curriculos",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "{{curriculoId}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Listar curriculos",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"if(pm.response.code === 200){\r",
+									"    var jsonData = JSON.parse(responseBody);\r",
+									"    if(jsonData.list.length > 0){\r",
+									"        pm.collectionVariables.set(\"curriculoId\", jsonData.list[0].id);\r",
+									"    }\r",
+									"}\r",
+									"\r",
+									"pm.test(\"Status code is 200\", function(){\r",
+									"    pm.response.to.have.status(200);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{urlBase}}/api/v1/curriculos",
+							"host": [
+								"{{urlBase}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"curriculos"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Adicionar curriculo",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"if(pm.response.code === 200){\r",
+									"    var jsonData = JSON.parse(responseBody);\r",
+									"    pm.collectionVariables.set(\"curriculoId\", jsonData.id);\r",
+									"}\r",
+									"\r",
+									"pm.test(\"Status code is 200\", function(){\r",
+									"    pm.response.to.have.status(200);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"titulo\": \"{{tituloVaga}}\",\r\n  \"candidatoId\": \"{{candidatoId}}\",\r\n  \"candidatoNome\": \"{{candidatoNome}}\",\r\n  \"resumo\": \"Codificar e testar sistemas. Executar a manutenção dos sistemas, fazendo eventuais correções necessárias, visando atender às necessidades dos usuários.\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{urlBase}}/api/v1/curriculos",
+							"host": [
+								"{{urlBase}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"curriculos"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Atualizar curriculo",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function(){\r",
+									"    pm.response.to.have.status(200);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id\": \"e79be345-fe0e-47bd-aaab-b1fa4c714513\",\r\n  \"titulo\": \"{{tituloVaga}}\",\r\n  \"candidatoId\": \"{{candidatoId}}\",\r\n  \"candidatoNome\": \"{{candidatoNome}}\",\r\n  \"resumo\": \"Codificar e testar sistemas. Executar a manutenção dos sistemas, fazendo eventuais correções necessárias, visando atender às necessidades dos usuários. zzzzz\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{urlBase}}/api/v1/curriculos",
+							"host": [
+								"{{urlBase}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"curriculos"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"auth": {
+		"type": "bearer",
+		"bearer": [
+			{
+				"key": "token",
+				"value": "{{accessToken}}",
+				"type": "string"
+			}
+		]
+	},
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "urlBase",
+			"value": "http://localhost:5000"
+		},
+		{
+			"key": "userNameRecrutador",
+			"value": "recrutador@teste.com",
+			"type": "string"
+		},
+		{
+			"key": "passwordRecrutador",
+			"value": "testE@123",
+			"type": "string"
+		},
+		{
+			"key": "userNameCandidato",
+			"value": "candidato@teste.com",
+			"type": "string"
+		},
+		{
+			"key": "passwordCandidato",
+			"value": "testE@123",
+			"type": "string"
+		},
+		{
+			"key": "accessToken",
+			"value": "",
+			"type": "string"
+		},
+		{
+			"key": "refreshToken",
+			"value": "",
+			"type": "string"
+		},
+		{
+			"key": "recrutadorId",
+			"value": "",
+			"type": "string"
+		},
+		{
+			"key": "vagaId",
+			"value": "",
+			"type": "string"
+		},
+		{
+			"key": "candidatoId",
+			"value": "",
+			"type": "string"
+		},
+		{
+			"key": "tituloVaga",
+			"value": "",
+			"type": "string"
+		},
+		{
+			"key": "candidatoNome",
+			"value": "",
+			"type": "string"
+		},
+		{
+			"key": "candidatoEmail",
+			"value": "",
+			"type": "string"
+		},
+		{
+			"key": "candidatoTelefone",
+			"value": "",
+			"type": "string"
+		},
+		{
+			"key": "candidaturaId",
+			"value": "",
+			"type": "string"
+		},
+		{
+			"key": "curriculoId",
+			"value": "",
+			"type": "string"
+		},
+		{
+			"key": "formacaoId",
+			"value": "",
+			"type": "string"
+		},
+		{
+			"key": "experienciaId",
+			"value": "",
+			"type": "string"
+		}
+	]
+}
